@@ -55,7 +55,7 @@ def get_urls():
         try:
             for i in data['data']:
                 img_url = i['attributes']['original_url']
-                img_type = img_url.split(".")[-1] # 拿到url中的最后一个/以后的内容(图片扩展名)
+                img_type = img_url.split(".")[-1] # 拿到url中的最后一个.以后的内容(图片扩展名)
                 name = f"{i['id']}.{img_type}"
                 img_url_num += 1
                 urls[name] = img_url # 通过使用新的索引键并为其赋值，可以将项目添加到字典中
