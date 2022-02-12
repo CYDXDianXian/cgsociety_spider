@@ -1,0 +1,1 @@
+start cmd /k py cgsociety_spider.py
