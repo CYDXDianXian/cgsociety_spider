@@ -4,10 +4,8 @@ from pathlib import Path
 import asyncio
 import aiohttp
 
-path_config = "cgsociety_download"  # 设置图片的保存地址
-
-path = Path(__file__).parent / path_config
-Path(path).mkdir(parents = True, exist_ok = True)
+path = "cgsociety_download"  # 设置图片的保存地址，相对路径，会在文件运行目录下创建该位置
+Path(path).mkdir(parents = True, exist_ok = True) # 不能用__file__获取绝对路径，否则打包exe后运行文件会在缓存目录下创建保存地址
 
 while True: # while True表示永远循环，while False表示它不会执行
     try:
@@ -17,6 +15,7 @@ while True: # while True表示永远循环，while False表示它不会执行
         continue
     if type(page_config) == int:
         print(f'您输入的页面数量为：{page_config}页，即将开始进行爬取')
+        time.sleep(3)
         break
 
 url_pages = []
@@ -64,14 +63,13 @@ def get_urls():
         except:
             error_num += 1
             print(f'图片地址爬取失败{error_num}个')
-        time.sleep(2)
     
     end_time = time.time()
     use_time = int(end_time - start_time)
     
     print(f'共爬取到{img_url_num}个文件，即将开始下载！')
-    
     get_urls_msg = f'共爬取成功{img_url_num}个文件，失败{error_num}个，爬取用时{use_time}秒'
+    time.sleep(3)
 
     return urls
 
@@ -102,9 +100,16 @@ async def main():
     await asyncio.wait(tasks)
     
     end = time.time()
-    print('全部完成！！！')
+
+# 报告部分
+    time_str = time.strftime('%Y-%m-%d %H:%M:%S') # 获取当前日期和时间
+    comp_msg = '本次任务完成！'
+    download_msg = f'共下载成功{success_download}个文件，失败{error_download}个，下载用时{int(end - start)}秒'
+    print(comp_msg)
     print(get_urls_msg)
-    print(f'共下载成功{success_download}个文件，失败{error_download}个，下载用时{int(end - start)}秒')
+    print(download_msg)
+    with Path('report.txt').open(mode='a', encoding='utf-8') as f:
+        f.write(f'-----【{time_str}】-----\n{comp_msg}\n{get_urls_msg}\n{download_msg}\n\n')
 
 if __name__ == "__main__":
     asyncio.run(main())

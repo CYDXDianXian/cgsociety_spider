@@ -9,8 +9,13 @@ cgsociety提供了大量高清图片以供艺术工作者进行参考，而首�
 - 可自定义要爬取的页面数量
 - 下载图片为原图，无压缩
 - 重复图片不会进行下载
+- 下载完成后生成报告
 
 # 使用方法
+
+在[Releases](https://github.com/CYDXDianXian/cgsociety_spider/releases)中获取应用程序，运行后按提示操作。
+
+或者下载仓库后按照以下方法使用：
 
 1. 该程序需在python环境下运行，请先安装pyhton，并勾选添加到path
 2. 安装依赖：install_requirements.bat
