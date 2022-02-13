@@ -110,6 +110,8 @@ async def main():
     print(download_msg)
     with Path('report.txt').open(mode='a', encoding='utf-8') as f:
         f.write(f'-----【{time_str}】-----\n{comp_msg}\n{get_urls_msg}\n{download_msg}\n\n')
+    print('程序将在10秒后结束......')
+    time.sleep(10) # 等10s再结束程序，让用户看到报告
 
 if __name__ == "__main__":
     asyncio.run(main())
