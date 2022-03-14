@@ -47,7 +47,7 @@ def get_urls():
         except:
             print(f'第{page_num}页访问超时，请检查链接地址是否正确，或开启代理！')
             continue
-        resp.encodin = 'utf-8'
+        resp.encoding = 'utf-8'
 
         data = resp.json()
 
